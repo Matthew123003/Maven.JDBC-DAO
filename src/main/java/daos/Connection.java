@@ -50,6 +50,9 @@ public class Connection{
             conn = DriverManager.getConnection(dbUrl, username, password);
             System.out.println("Connection Established to MYSQL Database");
             dao.create(new DTO("", "", 0, 0, 0, "", ""));
+            dao.findAll();
+            //dao.update();
+            dao.delete(10);
 
         } catch (SQLException e) {
             System.err.println(e.getMessage());

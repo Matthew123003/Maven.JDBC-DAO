@@ -124,7 +124,17 @@ public class FF7DAO implements InterfaceDAO<DTO> {
 
     @Override
     public void delete(int id) {
-        
+        try {
+            Statement stmt = Connection.getConnection().createStatement();
+            int i = stmt.executeUpdate("DELETE FROM user WHERE id=" + id);
+
+            if(i == 1) {
+                System.out.println("Object deleted");
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }
 
