@@ -73,6 +73,26 @@ public class FF7DAO implements InterfaceDAO<DTO> {
 
     @Override
     public DTO update(DTO dto) {
+        try {
+            PreparedStatement ps = Connection.getConnection().prepareStatement("UPDATE ff7_characters SET First_Name=?, Last_Name=?, Age=?, Height_Inches=?, Weight_LBS=?, Weapon=?, Ability=? WHERE ID=?");
+            ps.setString(1, dto.getFirstName());
+            ps.setString(2, dto.getLastName());
+            ps.setInt(3, dto.getAge());
+            ps.setInt(4, dto.getHeight());
+            ps.setInt(5, dto.getWeight());
+            ps.setString(6, dto.getWeapon());
+            ps.setString(7, dto.getAbility());
+            ps.setInt(8, dto.getId());
+            int i = ps.executeUpdate();
+
+            if(i == 1) {
+                System.out.println("Table updated");
+                return dto;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
         return null;
     }
 
@@ -104,7 +124,7 @@ public class FF7DAO implements InterfaceDAO<DTO> {
 
     @Override
     public void delete(int id) {
-
+        
     }
 }
 
