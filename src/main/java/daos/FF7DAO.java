@@ -22,7 +22,7 @@ public class FF7DAO implements InterfaceDAO<DTO> {
         ff7.setWeight( rs.getInt("Weight_LBS"));
         ff7.setWeapon( rs.getString("Weapon"));
         ff7.setAbility( rs.getString("Ability"));
-        System.out.println(ff7);
+        System.out.println(ff7.toString());
         return ff7;
     }
 
@@ -126,7 +126,7 @@ public class FF7DAO implements InterfaceDAO<DTO> {
     public void delete(int id) {
         try {
             Statement stmt = Connection.getConnection().createStatement();
-            int i = stmt.executeUpdate("DELETE FROM user WHERE id=" + id);
+            int i = stmt.executeUpdate("DELETE FROM ff7_characters WHERE id=" + id);
 
             if(i == 1) {
                 System.out.println("Object deleted");
