@@ -11,7 +11,12 @@ public class DTO implements DataTransferObject{
     private String ability;
 
     public DTO() {
+    }
 
+    public DTO(Integer age, Integer height, Integer weight) {
+        this.age = age;
+        this.height = height;
+        this.weight = weight;
     }
 
     public DTO(String fName, String lName, Integer age, Integer height, Integer weight, String weapon, String ability) {
