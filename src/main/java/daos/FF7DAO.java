@@ -22,7 +22,7 @@ public class FF7DAO implements InterfaceDAO<DTO> {
         ff7.setWeight( rs.getInt("Weight_LBS"));
         ff7.setWeapon( rs.getString("Weapon"));
         ff7.setAbility( rs.getString("Ability"));
-
+        System.out.println(ff7);
         return ff7;
     }
 
