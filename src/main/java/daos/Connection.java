@@ -44,10 +44,12 @@ public class Connection{
 
         System.out.println("MySQL JDBC Driver Registered!");
 
+        FF7DAO dao = FF7DAO.getInstance();
         java.sql.Connection conn = null;
         try{
             conn = DriverManager.getConnection(dbUrl, username, password);
             System.out.println("Connection Established to MYSQL Database");
+            dao.create(new DTO("", "", 0, 0, 0, "", ""));
 
         } catch (SQLException e) {
             System.err.println(e.getMessage());

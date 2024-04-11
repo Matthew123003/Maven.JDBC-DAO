@@ -11,55 +11,7 @@ public class DTO implements DataTransferObject{
     private String ability;
 
     public DTO() {
-    }
 
-    public DTO(String fName) {
-        this.fName = fName;
-    }
-
-    public DTO(String fName, String lName) {
-        this.fName = fName;
-        this.lName = lName;
-    }
-
-    public DTO(String fName, String lName, Integer age) {
-        this.fName = fName;
-        this.lName = lName;
-        this.age = age;
-    }
-
-    public DTO(Integer id, String fName, String lName, Integer age) {
-        this.id = id;
-        this.fName = fName;
-        this.lName = lName;
-        this.age = age;
-    }
-
-    public DTO(Integer id, String fName, String lName, Integer age, Integer height) {
-        this.id = id;
-        this.fName = fName;
-        this.lName = lName;
-        this.age = age;
-        this.height = height;
-    }
-
-    public DTO(Integer id, String fName, String lName, Integer age, Integer height, Integer weight) {
-        this.id = id;
-        this.fName = fName;
-        this.lName = lName;
-        this.age = age;
-        this.height = height;
-        this.weight = weight;
-    }
-
-    public DTO(Integer id, String fName, String lName, Integer age, Integer height, Integer weight, String weapon) {
-        this.id = id;
-        this.fName = fName;
-        this.lName = lName;
-        this.age = age;
-        this.height = height;
-        this.weight = weight;
-        this.weapon = weapon;
     }
 
     public DTO(String fName, String lName, Integer age, Integer height, Integer weight, String weapon, String ability) {
