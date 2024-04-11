@@ -1,13 +1,12 @@
 package daos;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FF7 implements InterfaceDAO{
+import static daos.Connection.*;
+
+public class FF7DAO implements InterfaceDAO{
     private Integer id;
     private String fName;
     private String lName;
@@ -17,32 +16,32 @@ public class FF7 implements InterfaceDAO{
     private String weapon;
     private String ability;
 
-    public FF7() {
+    public FF7DAO() {
     }
 
-    public FF7(String fName) {
+    public FF7DAO(String fName) {
         this.fName = fName;
     }
 
-    public FF7(String fName, String lName) {
+    public FF7DAO(String fName, String lName) {
         this.fName = fName;
         this.lName = lName;
     }
 
-    public FF7(String fName, String lName, Integer age) {
+    public FF7DAO(String fName, String lName, Integer age) {
         this.fName = fName;
         this.lName = lName;
         this.age = age;
     }
 
-    public FF7(Integer id, String fName, String lName, Integer age) {
+    public FF7DAO(Integer id, String fName, String lName, Integer age) {
         this.id = id;
         this.fName = fName;
         this.lName = lName;
         this.age = age;
     }
 
-    public FF7(Integer id, String fName, String lName, Integer age, Integer height) {
+    public FF7DAO(Integer id, String fName, String lName, Integer age, Integer height) {
         this.id = id;
         this.fName = fName;
         this.lName = lName;
@@ -50,7 +49,7 @@ public class FF7 implements InterfaceDAO{
         this.height = height;
     }
 
-    public FF7(Integer id, String fName, String lName, Integer age, Integer height, Integer weight) {
+    public FF7DAO(Integer id, String fName, String lName, Integer age, Integer height, Integer weight) {
         this.id = id;
         this.fName = fName;
         this.lName = lName;
@@ -59,7 +58,7 @@ public class FF7 implements InterfaceDAO{
         this.weight = weight;
     }
 
-    public FF7(Integer id, String fName, String lName, Integer age, Integer height, Integer weight, String weapon) {
+    public FF7DAO(Integer id, String fName, String lName, Integer age, Integer height, Integer weight, String weapon) {
         this.id = id;
         this.fName = fName;
         this.lName = lName;
@@ -69,7 +68,7 @@ public class FF7 implements InterfaceDAO{
         this.weapon = weapon;
     }
 
-    public FF7(Integer id, String fName, String lName, Integer age, Integer height, Integer weight, String weapon, String ability) {
+    public FF7DAO(Integer id, String fName, String lName, Integer age, Integer height, Integer weight, String weapon, String ability) {
         this.id = id;
         this.fName = fName;
         this.lName = lName;
@@ -145,11 +144,11 @@ public class FF7 implements InterfaceDAO{
     }
 
     @Override
-    public Object findById(int id) {
-        java.sql.Connection connection = Connection.getConnection();
+    public Object findById(int id) throws SQLException {
+        java.sql.Connection connection = DriverManager.getConnection(dbUrl, username, password);
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM ff7 WHERE id=" + id);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM ff7_characters WHERE id=" + id);
 
             if(rs.next())
             {
@@ -164,17 +163,17 @@ public class FF7 implements InterfaceDAO{
     }
 
     @Override
-    public List findAll() {
-        java.sql.Connection connection = Connection.getConnection();
+    public List findAll() throws SQLException {
+        java.sql.Connection connection = DriverManager.getConnection(dbUrl, username, password);
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM FF7");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM FF7_Characters");
 
             List<Object> FF7 = new ArrayList<>();
 
             while(rs.next())
             {
-                FF7 info = extractInfoFromResultSet(rs);
+                FF7DAO info = extractInfoFromResultSet(rs);
                 FF7.add(info);
             }
 
@@ -196,7 +195,7 @@ public class FF7 implements InterfaceDAO{
     public Object create(Object dto) {
         java.sql.Connection connection = Connection.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO user VALUES (NULL, ?, ?, ?)");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO FF7_Characters VALUES (NULL, ?, ?, ?)");
             ps.setString(1, dto.getFirstName());
             ps.setString(2, user.getPass());
             ps.setInt(3, user.getAge());
@@ -218,21 +217,19 @@ public class FF7 implements InterfaceDAO{
         java.sql.Connection connection = Connection.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            int i = stmt.executeUpdate("DELETE FROM user WHERE id=" + id);
+            int i = stmt.executeUpdate("DELETE FROM FF7_Characters WHERE id=" + id);
 
             if(i == 1) {
-                return true;
+                System.out.println("Deleted");
             }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
-        return false;
     }
 
-    private FF7 extractInfoFromResultSet(ResultSet rs) throws SQLException {
-        FF7 ff7 = new FF7();
+    private FF7DAO extractInfoFromResultSet(ResultSet rs) throws SQLException {
+        FF7DAO ff7 = new FF7DAO();
 
         ff7.setId( rs.getInt("id") );
         ff7.setFirstName( rs.getString("first_name") );
