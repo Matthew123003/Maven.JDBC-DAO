@@ -104,4 +104,10 @@ public class DTO implements DataTransferObject{
     public void setAbility(String ability) {
         this.ability = ability;
     }
+
+    public String toString(){
+        return "FF7 Character [id=" + id + ", First Name =" + fName + ", Last Name =" + lName
+                + ", Age =" + age + ", Height =" + height + "Weight =" + weight + "Weapon =" + weapon +
+                "Ability =" + ability +"]";
+    }
 }

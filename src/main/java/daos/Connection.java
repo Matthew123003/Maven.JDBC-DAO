@@ -13,8 +13,8 @@ import java.util.logging.Logger;
 
 public class Connection{
     public static final String dbUrl = "jdbc:mysql://localhost:3306/FF7";
-    public static final String username = "username";
-    public static final String password = "password";
+    public static final String username = "matt";
+    public static final String password = "zipcode0";
     static Logger demoLog =  Logger.getLogger("JDBC");
 
 
